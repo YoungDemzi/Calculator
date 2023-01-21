@@ -1,0 +1,93 @@
+:root{
+--dark-mode-main-backgroud-color: #243441;
+--dark-mode-shadow: #7c8c91;
+--white-mode-main-background-color: #ebebeb;
+
+--font-main: 'Roboto', sans-serif;
+--font-button-main-grey: #5c6c79;
+--font-button-orange:#ee802e;
+--font-text-white:#fbfcfe;
+
+}
+body{
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+.calculator-container{
+    box-shadow: 0px 3px 2rem #242a2c;
+    background-color: var(--dark-mode-main-backgroud-color);
+    font-family: var(--font-main);
+    border-radius: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    height: 36rem;
+    width: 21rem;
+}
+
+.display-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    height: 30%;
+}
+.current-text{
+    color: var(--font-text-white);
+    font-weight: 300;
+    font-size: 5rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.memory-text{
+    color: var(--font-button-main-grey);
+    font-weight: 500;
+    justify-content: flex-end;
+    height: 10%;
+    font-size: 1.2rem;
+    padding-right: 1rem;
+}
+.button-container{
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    padding: 1rem;
+    gap: 1.2rem;
+    height: 66%;
+}
+button{
+    color: var(--font-button-main-grey);
+    background: var(--dark-mode-main-backgroud-color);
+    font-family: var(--font-main);
+    border: none;
+    border-radius: 0.8rem;
+    box-shadow: 0px 3px 5px #242a2c;
+    text-align: center;
+    font-weight: 500;
+}
+button:hover{
+    color: #fbfcfe;
+    background-color: rgba(240, 248, 255, 0.048);
+    opacity: 0.8;
+}
+.orange{
+    color: var(--font-button-orange);
+}
+.clear-button{
+    width: 1.5rem;
+    height: 1.5rem;   
+}
+#equal-button{
+    background: var(--font-button-orange);
+    color: var(--font-text-white);
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+#equal-button:hover{
+        color: #fbfcfe;
+        background-color: #e98b43;
+}
