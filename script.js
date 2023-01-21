@@ -2,6 +2,7 @@ const dataNumber = document.querySelectorAll("[data-number]");
 const dataOperator = document.querySelectorAll("[data-operator]");
 const equalBtn = document.querySelector("[data-equal]");
 const resetBtn=document.querySelector("[data-reset]");
+const decimalBtn = document.querySelector("[data-dot]");
 let memoryDisplay = document.querySelector(".memory-text");
 let outcomeDisplay = document.querySelector(".outcome-text");
 
@@ -10,14 +11,27 @@ let value2='';
 let operator='';
 let isOperatorChoosen=false;
 let isContinued=false;
+let isDecimal=false;
 
 function enterValue(){
     dataNumber.forEach(element => {
         element.addEventListener("click",()=>{
             if(memoryDisplay.textContent==0) memoryDisplay.textContent="";
             memoryDisplay.textContent+=element.textContent;
-            if(!isContinued && !isOperatorChoosen)value1+=element.textContent;
-            else value2+=element.textContent;
+            if(!isContinued && !isOperatorChoosen && !isDecimal)value1+=element.textContent;
+            else if(!isDecimal) value2+=element.textContent;
+            
+            if(isDecimal && !isOperatorChoosen)
+            {   value1+=".";
+                value1+=element.textContent;
+                isDecimal=false;
+                
+            }
+            if(isDecimal && isOperatorChoosen){
+                value2+=element.textContent;
+                value2+=".";
+                isDecimal=false;
+            }
         });
     });
 }
@@ -34,7 +48,7 @@ function enterOperator(){
 }
 resetBtn.addEventListener("click",()=>{
     value1='';
-    value2='0';
+    value2='';
     operator='';
     isOperatorChoosen=false;
     isContinued=false;
@@ -56,12 +70,6 @@ function operate(operator,num1,num2){
         else if(operator == "x")return multiply(num1,num2);
         else if(operator == "÷")return divide(num1,num2);
         else if(operator == "%")return percentage(num1);
-        else if(operator == "."){
-            if(value1==0) outcomeDisplay.textContent=0.0;
-            isOperatorChoosen =false;
-            isContinued = false;
-            return decimal(num1);
-        }
         else {
             if(value1==0.0) outcomeDisplay.textContent=0;
             isContinued=false;
@@ -71,13 +79,21 @@ function operate(operator,num1,num2){
 }
 equalBtn.addEventListener("click",()=>{
     outcomeDisplay.textContent=operate(operator,value1,value2)
-    console.log(outcomeDisplay.textContent);
+    console.log(value1);
+    console.log(value2);
     isOperatorChoosen = false;
     isContinued=true;
     outcomeLength()
     value1=operate(operator,value1,value2);
     value2='';
 });
+if(!isDecimal){
+    decimalBtn.addEventListener("click",()=>{
+        memoryDisplay.textContent+=".";
+        isDecimal=true;
+    });
+}
+
 
 /*----------Calculation Functions----------*/
 function add(num1,num2){
@@ -94,9 +110,6 @@ function divide(num1,num2){
 }
 function percentage(num1){
     return num1/100;
-}
-function decimal(num1){
-    return `${num1}.0`;
 }
 
 /*
